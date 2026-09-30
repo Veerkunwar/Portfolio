@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: #ff2e4d55;
+  color: #f5f5f7;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #08090d;
+}
+::-webkit-scrollbar-thumb {
+  background: #24262f;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34364a;
+}
+
+:focus-visible {
+  outline: 2px solid #ff5470;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@layer components {
+  .section {
+    @apply mx-auto max-w-content px-6 md:px-10 py-24 md:py-32;
+  }
+
+  .section-heading {
+    @apply font-display text-3xl md:text-4xl font-medium tracking-tight text-ink;
+  }
+
+  .section-kicker {
+    @apply text-sm font-mono text-accent-glow;
+  }
+
+  .card {
+    @apply bg-base-surface border border-base-border rounded-2xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent-gradient
+      px-6 py-3 text-sm font-medium text-white transition-transform duration-200
+      hover:scale-[1.03] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-accent-glow;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-base-border
+      bg-transparent px-6 py-3 text-sm font-medium text-ink transition-colors duration-200
+      hover:border-accent-violet/60 hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm
+      font-medium text-ink-muted transition-colors duration-200 hover:text-ink;
+  }
+
+  .tag {
+    @apply rounded-full border border-base-border bg-base-raised px-3 py-1 font-mono text-xs text-ink-muted;
+  }
+}
