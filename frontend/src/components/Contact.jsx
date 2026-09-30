@@ -66,8 +66,8 @@ export default function Contact() {
   };
 
   const fields = [
-    { name: "name", label: "Full Name", type: "text", placeholder: "Jane Doe" },
-    { name: "email", label: "Email Address", type: "email", placeholder: "jane@example.com" },
+    { name: "name", label: "Full Name", type: "text", placeholder: "Shubh Singh" },
+    { name: "email", label: "Email Address", type: "email", placeholder: "shubh@gmail.com" },
     { name: "subject", label: "Subject", type: "text", placeholder: "Let's collaborate" },
   ];
 
