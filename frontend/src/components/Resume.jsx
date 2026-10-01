@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Download, ExternalLink, FileText } from "lucide-react";
 import { resume } from "../data/siteData";
 
 export default function Resume() {
-  const [available, setAvailable] = useState(true);
+  const [available, setAvailable] = useState(null); // null = checking, true/false = known
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(resume.filePath, { method: "HEAD" })
+      .then((res) => {
+        if (!cancelled) setAvailable(res.ok);
+      })
+      .catch(() => {
+        if (!cancelled) setAvailable(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <section id="resume" className="section">
@@ -47,27 +61,19 @@ export default function Resume() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="card overflow-hidden"
         >
-          {available && (
-            <object
-              data={resume.filePath}
-              type="application/pdf"
-              className="h-[420px] w-full"
-              aria-label="Resume preview"
-              onError={() => setAvailable(false)}
-            >
-              <div className="flex h-[420px] w-full flex-col items-center justify-center gap-3 text-ink-faint">
-                <FileText size={32} strokeWidth={1.5} />
-                <p className="font-mono text-xs">
-                  Add your PDF at public{resume.filePath} to enable the preview
-                </p>
-              </div>
-            </object>
-          )}
-          {!available && (
-            <div className="flex h-[420px] w-full flex-col items-center justify-center gap-3 text-ink-faint">
+          {available ? (
+            <iframe
+              src={resume.filePath}
+              title="Resume preview"
+              className="h-[420px] w-full border-0"
+            />
+          ) : (
+            <div className="flex h-[420px] w-full flex-col items-center justify-center gap-3 px-6 text-center text-ink-faint">
               <FileText size={32} strokeWidth={1.5} />
               <p className="font-mono text-xs">
-                Add your PDF at public{resume.filePath} to enable the preview
+                {available === null
+                  ? "Checking for resume..."
+                  : `Add your PDF at public${resume.filePath} to enable the preview`}
               </p>
             </div>
           )}
