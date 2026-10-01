@@ -45,9 +45,9 @@ export const stats = [
 
 // Add or remove links freely. Leave a url as "" to hide that icon.
 export const socialLinks = {
-  github: "",
-  linkedin: "",
-  email: "",
+  github: "https://github.com/Veerkunwar",
+  linkedin: "https://www.linkedin.com/in/veer-kunwar-singh/?isSelfProfile=true",
+  email: "veerkunwarsingh19296@gmail.com",
 };
 
 export const resume = {
